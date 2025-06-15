@@ -1,8 +1,12 @@
 import fastify from "fastify";
+import dbPlugin from "./core/database/database.plugin";
 
 const app = fastify({
   logger: true,
 });
+
+// Register DB plugin
+app.register(dbPlugin);
 
 app.get("/api/health", async (request, reply) => {
   return { status: "OK" };
