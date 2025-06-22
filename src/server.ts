@@ -1,6 +1,5 @@
 import fastify from "fastify";
 import dbPlugin from "./core/database/database.plugin";
-import { postsRoutes } from "./modules/posts/posts.routes";
 
 const app = fastify({
   logger: true,
@@ -8,9 +7,6 @@ const app = fastify({
 
 // Register DB plugin
 app.register(dbPlugin);
-
-// Register posts routes
-app.register(postsRoutes);
 
 app.get("/api/health", async (request, reply) => {
   return { status: "OK" };

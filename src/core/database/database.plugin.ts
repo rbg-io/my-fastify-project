@@ -1,5 +1,5 @@
 import fp from "fastify-plugin";
-import { Database } from "bun:sqlite";
+import Database from "better-sqlite3-bun";
 import {
   createTransactionHelpers,
   TransactionHelpers,
@@ -8,7 +8,7 @@ import { FastifyInstance } from "fastify";
 
 declare module "fastify" {
   interface FastifyInstance {
-    db: Database;
+    db: Database.Database;
     transations: TransactionHelpers;
   }
 }
@@ -16,16 +16,6 @@ declare module "fastify" {
 async function databasePlugin(fastify: FastifyInstance) {
   const db = new Database("./database.db");
   fastify.log.info("SQLite database connection established.");
-
-  // Initialize database tables
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS posts (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      img_url TEXT NOT NULL,
-      caption TEXT NOT NULL,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-  `);
 
   const transactions = createTransactionHelpers(db);
 

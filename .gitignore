@@ -30,9 +30,6 @@ build/Release
 node_modules
 jspm_packages
 
-# Bun
-.bun
-
 # Optional npm cache directory
 .npm
 
@@ -59,16 +56,3 @@ profile-*
 profile*
 *clinic*
 *flamegraph*
-
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# TypeScript
-*.tsbuildinfo
-
-# Build outputs
-dist/
-build/
-out/
